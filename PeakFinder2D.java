@@ -38,21 +38,6 @@ public class PeakFinder2D {
                 else {
                     return peak;
                 }
-                /*
-                if (col == 4) {
-                    break;
-                }
-                else if (a[row][col] > a[row][col+1]) {
-                    if (row == 4) {
-                        peak = a[row][col];
-                        return peak;
-                    }
-                    else if (a[row][col] > a[row+1][col]) {
-                        peak = a[row][col];
-                        return peak;
-                    }
-                }
-                 */
             }
         }
         return peak;
@@ -67,7 +52,7 @@ public class PeakFinder2D {
         }
         return imax;
     }
-
+*/
     public int findMaxOnCol(int col){
         int imax = 0;
         for(int i = 0; i < nrow; i++ ){
@@ -77,7 +62,7 @@ public class PeakFinder2D {
         }
         return imax;
     }
-
+/*
     public int findMaxOnRow(int row){
         int imax = 0;
         for(int i = 0; i < ncol; i++ ){
@@ -87,21 +72,25 @@ public class PeakFinder2D {
         }
         return imax;
     }
-
+*/
     public int divideAndConquer1(int startcol, int endcol){
         //TODO correct and complete the code
         int midcol = (startcol + endcol)/2; //1 tane
-        int imax = findMaxOnCol(midcol); // number of rows: m
+        int maxInRow = findMaxOnCol(midcol); // number of rows: m
         ///base case TODO: boundary conditions
-        if(a[imax][midcol] >= a[imax][midcol+1] && a[imax][midcol] >= a[imax][midcol-1]  ) //2 tane
-            return a[imax][midcol];
-        if(a[imax][midcol] >= a[imax][midcol+1] )
-            return  divideAndConquer1(midcol, endcol);
-
-        if(a[imax][midcol] >= a[imax][midcol-1]  )
+        if(a[maxInRow][midcol] >= a[maxInRow][midcol+1] && a[maxInRow][midcol] >= a[maxInRow][midcol-1]  ) {//2 tane
+            return a[maxInRow][midcol];
+        }
+        if(a[maxInRow][midcol] <= a[maxInRow][midcol+1] ) {
+            return divideAndConquer1(midcol, endcol);
+        }
+        if(a[maxInRow][midcol] <= a[maxInRow][midcol-1] ) {
             return divideAndConquer1(startcol, midcol);
+        }
+
+        return 0;
     }
-*/
+
     /** derste anlatilan divide and conquer  yontemini kullanarak O(n+m)
      *  zamanda peak bulan algoritmanin implemantasyonunu yaziniz*/
 /*    public int divideAndConquer1(int startrow, int startcol, int endrow, int endcol){
@@ -113,23 +102,30 @@ public class PeakFinder2D {
         //TODO
         for(int row = 0; row < nrow; row++){
             for(int col = 0; col < ncol; col++){
-                System.out.print(a[row][col] + " ");
+                System.out.print(a[row][col] + "\t");
             }
             System.out.println();
         }
     }
+
     static void testGreedyAlg(){
         //TODO
         PeakFinder2D test = new PeakFinder2D();
 
         test.printArray();
-        test.greedyAlg();
 
-        System.out.println(test.greedyAlg());
+        System.out.println("Greedy Peak: " + test.greedyAlg() + "\n");
     }
+
     static void testDivideAndConq1(){
         //TODO
+        PeakFinder2D test = new PeakFinder2D();
+
+        test.printArray();
+
+        System.out.println("Divide and Conquer1 Peak: " + test.divideAndConquer1(0, 4) + "\n");
     }
+
     static void testDivideAndConq2(){
         //TODO
     }
