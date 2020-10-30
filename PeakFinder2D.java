@@ -78,13 +78,13 @@ public class PeakFinder2D {
         int midcol = (startcol + endcol)/2; //1 tane
         int maxInCol = findMaxOnCol(midcol); // number of rows: m
         ///base case TODO: boundary conditions
-        if(a[maxInCol][midcol] >= a[maxInCol][midcol+1] && a[maxInCol][midcol] >= a[maxInCol][midcol-1]  ) {//2 tane
+        if(( a[maxInCol][midcol] >= a[maxInCol][midcol+1] || midcol == nrow-1) && (a[maxInCol][midcol] >= a[maxInCol][midcol-1] || midcol == 0) ) {//2 tane
             return a[maxInCol][midcol];
         }
-        if(a[maxInCol][midcol] <= a[maxInCol][midcol+1] ) {
+        else if(a[maxInCol][midcol] <= a[maxInCol][midcol+1] || midcol == nrow-1 ) {
             return divideAndConquer1(midcol, endcol);
         }
-        if(a[maxInCol][midcol] <= a[maxInCol][midcol-1] ) {
+        else if(a[maxInCol][midcol] <= a[maxInCol][midcol-1] || midcol == 0 ) {
             return divideAndConquer1(startcol, midcol);
         }
 
@@ -101,13 +101,13 @@ public class PeakFinder2D {
             int midrow = (startrow + endrow)/2;
             int maxInRow = findMaxOnRow(midrow);
 
-            if(a[midrow][maxInRow] >= a[midrow][maxInRow+1] && a[midrow][maxInRow] >= a[midrow][maxInRow-1]  ) {//2 tane
+            if(a[midrow][maxInRow] >= a[midrow+1][maxInRow] && a[midrow][maxInRow] >= a[midrow-1][maxInRow]  ) {
                 return a[midrow][maxInRow];
             }
-            if(a[midrow][maxInRow] <= a[midrow][maxInRow+1] ) {
+            else if(a[midrow][maxInRow] <= a[midrow+1][maxInRow] ) {
                 return divideAndConquer1(midrow, startcol, endrow,endcol);
             }
-            if(a[midrow][maxInRow] <= a[midrow][maxInRow-1] ) {
+            else if(a[midrow][maxInRow] <= a[midrow-1][maxInRow] ) {
                 return divideAndConquer1( startrow,startcol, midrow, endcol);
             }
         }
@@ -116,13 +116,13 @@ public class PeakFinder2D {
             int midcol = (startcol + endcol)/2;
             int maxInCol = findMaxOnCol(midcol);
 
-            if(a[maxInCol][midcol] >= a[maxInCol][midcol+1] && a[maxInCol][midcol] >= a[maxInCol][midcol-1]  ) {//2 tane
+            if(a[maxInCol][midcol] >= a[maxInCol][midcol+1] && a[maxInCol][midcol] >= a[maxInCol][midcol-1]  ) {
                 return a[maxInCol][midcol];
             }
-            if(a[maxInCol][midcol] <= a[maxInCol][midcol+1] ) {
+            else if(a[maxInCol][midcol] <= a[maxInCol][midcol+1] ) {
                 return divideAndConquer1(startrow, midcol, endrow, endcol);
             }
-            if(a[maxInCol][midcol] <= a[maxInCol][midcol-1] ) {
+            else if(a[maxInCol][midcol] <= a[maxInCol][midcol-1] ) {
                 return divideAndConquer1(startrow, startcol, endrow, midcol);
             }
         }
