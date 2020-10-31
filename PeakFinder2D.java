@@ -6,7 +6,7 @@ public class PeakFinder2D {
 
     int[][] a;
 
-    int nrow = 5, ncol = 5;
+    int nrow = 3, ncol = 3;
 
     public PeakFinder2D(){
         a = new int[nrow][ncol];
@@ -25,14 +25,12 @@ public class PeakFinder2D {
             int col = 0;
             while (col < ncol){
                 //TODO
-                if (a[row][col+1] >= a[row][col] && col != 4) {
-                    row = row;
+                if (col != ncol-1 && a[row][col+1] >= a[row][col]) {
                     col = col+1;
                     peak = a[row][col];
                 }
-                else if (a[row+1][col] >= a[row][col] && row != 4) {
+                else if (row != nrow-1 && a[row+1][col] >= a[row][col]) {
                     row = row+1;
-                    col = col;
                     peak = a[row][col];
                 }
                 else {
@@ -126,8 +124,6 @@ public class PeakFinder2D {
                 return divideAndConquer1(startrow, startcol, endrow, midcol);
             }
         }
-
-
 
         return 0;
     }
