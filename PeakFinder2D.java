@@ -6,7 +6,7 @@ public class PeakFinder2D {
 
     int[][] a;
 
-    int nrow = 3, ncol = 3;
+    int nrow = 5, ncol = 5;
 
     public PeakFinder2D(){
         a = new int[nrow][ncol];
@@ -76,14 +76,14 @@ public class PeakFinder2D {
         int midcol = (startcol + endcol)/2; //1 tane
         int maxInCol = findMaxOnCol(midcol); // number of rows: m
         ///base case TODO: boundary conditions
-        if(( a[maxInCol][midcol] >= a[maxInCol][midcol+1] || midcol == nrow-1) && (a[maxInCol][midcol] >= a[maxInCol][midcol-1] || midcol == 0) ) {//2 tane
+        if((startcol == endcol) || ((midcol != ncol-1 && a[maxInCol][midcol] >= a[maxInCol][midcol+1]) && (midcol != 0 && a[maxInCol][midcol] >= a[maxInCol][midcol-1]) )) {//2 tane
             return a[maxInCol][midcol];
         }
-        else if(a[maxInCol][midcol] <= a[maxInCol][midcol+1] || midcol == nrow-1 ) {
-            return divideAndConquer1(midcol, endcol);
+        else if(midcol != ncol-1 && a[maxInCol][midcol] <= a[maxInCol][midcol+1]) {
+            return divideAndConquer1(midcol+1, endcol);
         }
-        else if(a[maxInCol][midcol] <= a[maxInCol][midcol-1] || midcol == 0 ) {
-            return divideAndConquer1(startcol, midcol);
+        else if(midcol != 0 && a[maxInCol][midcol] <= a[maxInCol][midcol-1]) {
+            return divideAndConquer1(startcol, midcol-1);
         }
 
         return 0;
@@ -154,7 +154,7 @@ public class PeakFinder2D {
 
         test.printArray();
 
-        System.out.println("Divide and Conquer1 Peak: " + test.divideAndConquer1(0, 4) + "\n");
+        System.out.println("Divide and Conquer1 Peak: " + test.divideAndConquer1(0, test.ncol-1) + "\n");
     }
 
     static void testDivideAndConq2(){
