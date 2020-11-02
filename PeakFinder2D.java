@@ -33,6 +33,15 @@ public class PeakFinder2D {
                     row = row+1;
                     peak = a[row][col];
                 }
+                else if (col != 0 && a[row][col-1] > a[row][col]) {
+                    col = col-1;
+                    peak = a[row][col];
+                }
+                else if (row != 0 && a[row-1][col] > a[row][col]) {
+                    row = row-1;
+                    peak = a[row][col];
+                }
+
                 else {
                     return peak;
                 }
