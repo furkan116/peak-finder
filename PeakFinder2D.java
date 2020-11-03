@@ -24,6 +24,7 @@ public class PeakFinder2D {
         while(row < nrow){
             int col = 0;
             while (col < ncol){
+                //Burada matristeki [0,0] noktasındaki sayıdan başlayarak onun etrafındaki sayıları kontrol edip eğe büyük bir sayı var sa ona gider ve peak bulunana kadar işlemi tekrarlar. Matris alanının dışındaki bir şeyle karşılaşmaması için alanıda kontrol ediyor.
                 //TODO
                 if (col != ncol-1 && a[row][col+1] >= a[row][col]) {
                     col = col+1;
@@ -61,6 +62,7 @@ public class PeakFinder2D {
     }
 */
     public int findMaxOnCol(int col){
+        //Burada değişiklik yapmadım
         int imax = 0;
         for(int i = 0; i < nrow; i++ ){
             if(a[i][col]>a[imax][col]){
@@ -69,7 +71,7 @@ public class PeakFinder2D {
         }
         return imax;
     }
-
+/*
     public int findMaxOnRow(int row){
         int imax = 0;
         for(int i = 0; i < ncol; i++ ){
@@ -79,8 +81,9 @@ public class PeakFinder2D {
         }
         return imax;
     }
-
+*/
     public int findMaxOnColWithRange(int col, int startrow, int endrow){
+        //Bu metodu ben yazdım. Amacı testDivideAndConq2 için çağırılan çok parametreli olan divideAndConquer1 için belirtilen ve değiştirilebilen sütunda maksimumu bulma
         int imax = startrow;
         for(int i = startrow; i < endrow; i++ ){
             if(a[i][col]>a[imax][col]){
@@ -91,6 +94,7 @@ public class PeakFinder2D {
     }
 
     public int findMaxOnRowWithRange(int row, int startcol, int endcol){
+        //Bu metodu ben yazdım. Amacı testDivideAndConq2 için çağırılan çok parametreli olan divideAndConquer1 için belirtilen ve değiştirilebilen satırda maksimumu bulma
         int imax = startcol;
         for(int i = startcol; i < endcol; i++ ){
             if(a[row][i]>a[row][imax]){
@@ -101,6 +105,7 @@ public class PeakFinder2D {
     }
 
     public int divideAndConquer1(int startcol, int endcol){
+        //Burada sadece hata düzeltme ve sınırları kontrol etme yaptım. Burada satırlar üzerinden işlem yapılmakta.
         //TODO correct and complete the code
         int midcol = (startcol + endcol)/2; //1 tane
         int maxInCol = findMaxOnCol(midcol); // number of rows: m
@@ -123,7 +128,7 @@ public class PeakFinder2D {
     public int divideAndConquer1(int startrow, int startcol, int endrow, int endcol){
         //TODO
 
-        if ((startrow + endrow) >= (startcol + endcol)) {
+        if ((endrow - startrow) >= (endcol - startcol)) {//Burada büyüklüğü hesaplamak için çıkarma yapıyoruz çünkü toplama yapılması durumunda satır sayısı küçülse bile satırların numaralarının toplamının büyük olma ihtimali var ama çıkarma yaparak aradaki farkı hesaplarsak satır sayılarına ulaşabiliriz
 
             int midrow = (startrow + endrow)/2;
             int maxInRow = findMaxOnRowWithRange(midrow, startcol, endcol);
@@ -138,7 +143,7 @@ public class PeakFinder2D {
                 return divideAndConquer1( startrow,startcol, midrow, endcol);
             }
         }
-        else if ((startrow + endrow) < (startcol + endcol)) {
+        else if ((endrow - startrow) < (endcol - startcol)) {
 
             int midcol = (startcol + endcol)/2;
             int maxInCol = findMaxOnColWithRange(midcol, startrow, endrow);
@@ -165,6 +170,7 @@ public class PeakFinder2D {
                 System.out.print(a[row][col] + "\t");
             }
             System.out.println();
+            //Tüm elemalraı gezerek yazdırıyor ve hepsinin düzenli bie şekilde durmasını sağlar
         }
     }
 
