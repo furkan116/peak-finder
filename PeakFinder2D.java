@@ -51,7 +51,7 @@ public class PeakFinder2D {
         return peak;
     }
 /*
-    public int findMax(int[] b[]){
+    public int findMax(int[] b[]){//Kullanmadım
         int imax = 0;
         for(int i = 0; i < a.length; i++ ){
             if(a[i] > a[imax]){
@@ -61,6 +61,7 @@ public class PeakFinder2D {
         return imax;
     }
 */
+
     public int findMaxOnCol(int col){
         //Burada değişiklik yapmadım
         int imax = 0;
@@ -72,7 +73,7 @@ public class PeakFinder2D {
         return imax;
     }
 /*
-    public int findMaxOnRow(int row){
+    public int findMaxOnRow(int row){//Kullanmadım
         int imax = 0;
         for(int i = 0; i < ncol; i++ ){
             if(a[row][i]>a[row][imax]){
@@ -82,6 +83,7 @@ public class PeakFinder2D {
         return imax;
     }
 */
+
     public int findMaxOnColWithRange(int col, int startrow, int endrow){
         //Bu metodu ben yazdım. Amacı testDivideAndConq2 için çağırılan çok parametreli olan divideAndConquer1 için belirtilen ve değiştirilebilen sütunda maksimumu bulma
         int imax = startrow;
