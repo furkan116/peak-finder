@@ -6,9 +6,9 @@ public class PeakFinder2D {
 
     int[][] a;
 
-    int nrow = 5, ncol = 5;
+    int nrow = 5, ncol = 5;//Heryerde kullanılabilmesi için global olarak tanımladım
 
-    public PeakFinder2D(){
+    public PeakFinder2D(){//Constructorda hataları düzelttim ve atanacak sayılara 0 ile 99 arasında olması için sınırları belirledim
         a = new int[nrow][ncol];
         Random r = new Random();
         for (int i = 0; i < nrow; i++) {
@@ -80,9 +80,9 @@ public class PeakFinder2D {
         return imax;
     }
 
-    public int findMaxOnCol(int col, int startrow, int endrow){
+    public int findMaxOnColWithRange(int col, int startrow, int endrow){
         int imax = startrow;
-        for(int i = 0; i < endrow; i++ ){
+        for(int i = startrow; i < endrow; i++ ){
             if(a[i][col]>a[imax][col]){
                 imax = i;
             }
@@ -90,9 +90,9 @@ public class PeakFinder2D {
         return imax;
     }
 
-    public int findMaxOnRow(int row, int startcol, int endcol){
+    public int findMaxOnRowWithRange(int row, int startcol, int endcol){
         int imax = startcol;
-        for(int i = 0; i < endcol; i++ ){
+        for(int i = startcol; i < endcol; i++ ){
             if(a[row][i]>a[row][imax]){
                 imax = i;
             }
@@ -126,7 +126,7 @@ public class PeakFinder2D {
         if ((startrow + endrow) >= (startcol + endcol)) {
 
             int midrow = (startrow + endrow)/2;
-            int maxInRow = findMaxOnRow(midrow, startcol, endcol);
+            int maxInRow = findMaxOnRowWithRange(midrow, startcol, endcol);
 
             if(a[midrow][maxInRow] > a[midrow+1][maxInRow] && a[midrow][maxInRow] > a[midrow-1][maxInRow]  ) {
                 return a[midrow][maxInRow];
@@ -141,7 +141,7 @@ public class PeakFinder2D {
         else if ((startrow + endrow) < (startcol + endcol)) {
 
             int midcol = (startcol + endcol)/2;
-            int maxInCol = findMaxOnCol(midcol, startrow, endrow);
+            int maxInCol = findMaxOnColWithRange(midcol, startrow, endrow);
 
             if(a[maxInCol][midcol] > a[maxInCol][midcol+1] && a[maxInCol][midcol] > a[maxInCol][midcol-1]  ) {
                 return a[maxInCol][midcol];
