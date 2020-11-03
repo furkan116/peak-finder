@@ -80,6 +80,26 @@ public class PeakFinder2D {
         return imax;
     }
 
+    public int findMaxOnCol(int col, int startrow, int endrow){
+        int imax = startrow;
+        for(int i = 0; i < endrow; i++ ){
+            if(a[i][col]>a[imax][col]){
+                imax = i;
+            }
+        }
+        return imax;
+    }
+
+    public int findMaxOnRow(int row, int startcol, int endcol){
+        int imax = startcol;
+        for(int i = 0; i < endcol; i++ ){
+            if(a[row][i]>a[row][imax]){
+                imax = i;
+            }
+        }
+        return imax;
+    }
+
     public int divideAndConquer1(int startcol, int endcol){
         //TODO correct and complete the code
         int midcol = (startcol + endcol)/2; //1 tane
@@ -106,9 +126,9 @@ public class PeakFinder2D {
         if ((startrow + endrow) >= (startcol + endcol)) {
 
             int midrow = (startrow + endrow)/2;
-            int maxInRow = findMaxOnRow(midrow);
+            int maxInRow = findMaxOnRow(midrow, startcol, endcol);
 
-            if(a[midrow][maxInRow] >= a[midrow+1][maxInRow] && a[midrow][maxInRow] >= a[midrow-1][maxInRow]  ) {
+            if(a[midrow][maxInRow] > a[midrow+1][maxInRow] && a[midrow][maxInRow] > a[midrow-1][maxInRow]  ) {
                 return a[midrow][maxInRow];
             }
             else if(a[midrow][maxInRow] <= a[midrow+1][maxInRow] ) {
@@ -121,9 +141,9 @@ public class PeakFinder2D {
         else if ((startrow + endrow) < (startcol + endcol)) {
 
             int midcol = (startcol + endcol)/2;
-            int maxInCol = findMaxOnCol(midcol);
+            int maxInCol = findMaxOnCol(midcol, startrow, endrow);
 
-            if(a[maxInCol][midcol] >= a[maxInCol][midcol+1] && a[maxInCol][midcol] >= a[maxInCol][midcol-1]  ) {
+            if(a[maxInCol][midcol] > a[maxInCol][midcol+1] && a[maxInCol][midcol] > a[maxInCol][midcol-1]  ) {
                 return a[maxInCol][midcol];
             }
             else if(a[maxInCol][midcol] <= a[maxInCol][midcol+1] ) {
@@ -172,7 +192,7 @@ public class PeakFinder2D {
 
         test.printArray();
 
-        System.out.println("Divide and Conquer2 Peak: " + test.divideAndConquer1(0, 0, 4, 4) + "\n");
+        System.out.println("Divide and Conquer2 Peak: " + test.divideAndConquer1(0, 0, test.nrow, test.ncol) + "\n");
     }
 
 }
