@@ -203,4 +203,13 @@ public class PeakFinder2D {
         System.out.println("Divide and Conquer2 Peak: " + test.divideAndConquer1(0, 0, test.nrow, test.ncol) + "\n");
     }
 
+    static void testAll() {
+        PeakFinder2D test = new PeakFinder2D();
+
+        test.printArray();
+
+        System.out.println("Greedy Peak: " + test.greedyAlg() + "\n");
+        System.out.println("Divide and Conquer1 Peak: " + test.divideAndConquer1(0, test.ncol-1) + "\n");
+        System.out.println("Divide and Conquer2 Peak: " + test.divideAndConquer1(0, 0, test.nrow, test.ncol) + "\n");
+    }
 }

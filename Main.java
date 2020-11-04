@@ -10,6 +10,7 @@ public class Main {
         System.out.println("1-Greedy");
         System.out.println("2-DivideAndConq1");
         System.out.println("3-DivideAndConq2");
+        System.out.println("4-Hepsini ayni anda calistirmak icin");
         System.out.println("Hangi yontem ile matrisinizi hesaplamak istersiniz: ");
 
         Scanner scanner = new Scanner(System.in);
@@ -19,6 +20,7 @@ public class Main {
             case 1: PeakFinder2D.testGreedyAlg();break;
             case 2: PeakFinder2D.testDivideAndConq1();break;
             case 3: PeakFinder2D.testDivideAndConq2();break;
+            case 4: PeakFinder2D.testAll();break;
         }
     }
 }
